@@ -17,31 +17,31 @@ title: Welcome
   <div class="p-6 bg-white rounded-xl shadow-sm border border-stone-200">
     <h3 class="text-xl font-bold text-green-800 mb-2">Nature & Wildlife</h3>
     <p class="text-stone-600">Keep track of local bird sightings and seasonal changes.</p>
-    <a href="{{ site.baseurl }}/map/" class="text-green-700 font-semibold hover:text-green-600 inline-flex items-center mt-4">
-      View map
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-      </svg>
-    </a>
   </div>
   <div class="p-6 bg-white rounded-xl shadow-sm border border-stone-200">
     <h3 class="text-xl font-bold text-green-800 mb-2">Park Events</h3>
     <p class="text-stone-600">Check our timeline for seasonal highlights and upcoming community events.</p>
-    <a href="{{ site.baseurl }}/timeline/" class="text-green-700 font-semibold hover:text-green-600 inline-flex items-center mt-4">
-      View timeline
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-      </svg>
-    </a>
   </div>
   <div class="p-6 bg-white rounded-xl shadow-sm border border-stone-200">
     <h3 class="text-xl font-bold text-green-800 mb-2">Community Stories</h3>
     <p class="text-stone-600">Read our latest blog posts for updates and park adventures.</p>
-    <a href="{{ site.baseurl }}/blog/" class="text-green-700 font-semibold hover:text-green-600 inline-flex items-center mt-4">
-      Read blog
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-      </svg>
-    </a>
+  </div>
+</section>
+
+<section class="mt-16">
+  <h2 class="text-3xl font-bold text-stone-900 mb-8">Latest Blog Posts</h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    {% for post in site.posts limit:2 %}
+    <article class="bg-white rounded-xl shadow-sm overflow-hidden border border-stone-200 hover:shadow-md transition-shadow">
+      <div class="p-6">
+        <span class="text-sm text-stone-500 font-medium uppercase tracking-wide">{{ post.date | date: "%b %d, %Y" }}</span>
+        <h3 class="text-xl font-bold text-green-800 mt-2 mb-3">
+          <a href="{{ site.baseurl }}{{ post.url }}" class="hover:underline">{{ post.title }}</a>
+        </h3>
+        <p class="text-stone-600 line-clamp-2">{{ post.excerpt | strip_html }}</p>
+        <a href="{{ site.baseurl }}{{ post.url }}" class="mt-4 inline-block text-green-700 font-semibold hover:text-green-600 text-sm">Read more &rarr;</a>
+      </div>
+    </article>
+    {% endfor %}
   </div>
 </section>
