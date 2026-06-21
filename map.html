@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Bird Map
+permalink: /map/
 ---
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -11,7 +12,6 @@ title: Bird Map
 <div id="map" class="h-[500px] w-full rounded-xl shadow-inner border border-stone-300 z-0"></div>
 
 <script>
-    // Data injected by Jekyll
     const birdSightings = [
       {% for bird in site.data.birds %}
       {
@@ -24,16 +24,12 @@ title: Bird Map
       {% endfor %}
     ];
 
-    // Initialize map
-    // Centering on the requested coordinates
     const map = L.map('map').setView([45.058486, -93.233195], 15);
 
-    // Add OpenStreetMap tiles
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; OpenStreetMap contributors'
     }).addTo(map);
 
-    // Add markers
     birdSightings.forEach(bird => {
         L.marker([bird.lat, bird.lng])
             .addTo(map)
