@@ -1,8 +1,8 @@
 title: Kordiak Park Explorer
 email: info@kordiakpark.example
 description: Exploring the beauty of Kordiak Park in Columbia Heights, MN.
-baseurl: ""
-url: "https://r-egun.github.io/kordiak-park"
+baseurl: "/Kordiak_Park"
+url: "https://r-egun.github.io"
 
 # Default layout for all pages
 defaults:
