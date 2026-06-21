@@ -16,12 +16,12 @@
 
     <header class="bg-white shadow-sm sticky top-0 z-50">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="/" class="text-2xl font-bold text-green-800">{{ site.title }}</a>
+            <a href="{{ site.baseurl }}/" class="text-2xl font-bold text-green-800">{{ site.title }}</a>
             <ul class="flex space-x-6 font-medium">
-                <li><a href="/" class="nav-link text-stone-600">Home</a></li>
-                <li><a href="/blog" class="nav-link text-stone-600">Blog</a></li>
-                <li><a href="/timeline" class="nav-link text-stone-600">Timeline</a></li>
-                <li><a href="/map" class="nav-link text-stone-600">Map</a></li>
+                <li><a href="{{ site.baseurl }}/" class="nav-link text-stone-600">Home</a></li>
+                <li><a href="{{ site.baseurl }}/blog" class="nav-link text-stone-600">Blog</a></li>
+                <li><a href="{{ site.baseurl }}/timeline" class="nav-link text-stone-600">Timeline</a></li>
+                <li><a href="{{ site.baseurl }}/map" class="nav-link text-stone-600">Map</a></li>
             </ul>
         </nav>
     </header>
