@@ -10,11 +10,11 @@ title: Blog
     <div class="p-6">
       <span class="text-sm text-stone-500 font-medium uppercase tracking-wide">{{ post.date | date: "%b %d, %Y" }}</span>
       <h2 class="text-2xl font-bold text-green-800 mt-2 mb-3">
-        <a href="{{ post.url }}" class="hover:underline">{{ post.title }}</a>
+        <a href="{{ site.baseurl }}{{ post.url }}" class="hover:underline">{{ post.title }}</a>
       </h2>
       <p class="text-stone-600 line-clamp-3">{{ post.excerpt | strip_html }}</p>
       <div class="mt-4">
-        <a href="{{ post.url }}" class="text-green-700 font-semibold hover:text-green-600 inline-flex items-center">
+        <a href="{{ site.baseurl }}{{ post.url }}" class="text-green-700 font-semibold hover:text-green-600 inline-flex items-center">
           Read more
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
