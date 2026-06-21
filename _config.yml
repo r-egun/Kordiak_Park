@@ -1,0 +1,17 @@
+title: Kordiak Park Explorer
+email: info@kordiakpark.example
+description: Exploring the beauty of Kordiak Park in Columbia Heights, MN.
+baseurl: ""
+url: "https://your-username.github.io/kordiak-park"
+
+# Default layout for all pages
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default
+
+# Collections (for future expansion like the dog roster)
+collections:
+  dogs:
+    output: true
