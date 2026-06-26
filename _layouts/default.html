@@ -6,35 +6,71 @@
     <title>{{ page.title }} | {{ site.title }}</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+    <link rel="stylesheet" href="/assets/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        lucide.createIcons();
+      });
+    </script>
     <style>
         body { font-family: 'Inter', sans-serif; }
         h1, h2, h3 { font-family: 'Lora', serif; }
-        .nav-link { @apply hover:text-green-700 transition-colors; }
+        .nav-link { @apply hover:text-green-700 transition-colors flex items-center gap-1; }
     </style>
 </head>
 <body class="bg-stone-50 text-stone-800 flex flex-col min-h-screen">
 
     <header class="bg-white shadow-sm sticky top-0 z-50">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="{{ site.baseurl }}/" class="text-2xl font-bold text-green-800">{{ site.title }}</a>
-            <ul class="flex space-x-6 font-medium">
-                <li><a href="{{ site.baseurl }}/" class="nav-link text-stone-600">Home</a></li>
-                <li><a href="{{ site.baseurl }}/blog/" class="nav-link text-stone-600">Blog</a></li>
-                <li><a href="{{ site.baseurl }}/timeline/" class="nav-link text-stone-600">Timeline</a></li>
-                <li><a href="{{ site.baseurl }}/map/" class="nav-link text-stone-600">Map</a></li>
-            </ul>
+            <a href="{{ site.baseurl }}/" class="text-2xl font-bold text-green-800 flex items-center gap-2">
+                <i data-lucide="trees" class="w-8 h-8 text-green-700"></i>
+                {{ site.title }}
+            </a>
+            
+            <div class="flex items-center gap-6">
+                <ul class="hidden md:flex space-x-6 font-medium">
+                    <li><a href="{{ site.baseurl }}/" class="nav-link text-stone-600"><i data-lucide="home" class="w-4 h-4"></i> Home</a></li>
+                    <li><a href="{{ site.baseurl }}/blog/" class="nav-link text-stone-600"><i data-lucide="book-open" class="w-4 h-4"></i> Blog</a></li>
+                    <li><a href="{{ site.baseurl }}/timeline/" class="nav-link text-stone-600"><i data-lucide="calendar" class="w-4 h-4"></i> Timeline</a></li>
+                    <li><a href="{{ site.baseurl }}/map/" class="nav-link text-stone-600"><i data-lucide="map-pin" class="w-4 h-4"></i> Map</a></li>
+                </ul>
+                
+                <div class="relative hidden lg:block">
+                    <input type="text" placeholder="Search..." class="pl-10 pr-4 py-1 rounded-full border border-stone-300 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 transition-all">
+                    <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1.5 text-stone-400"></i>
+                </div>
+            </div>
         </nav>
     </header>
 
-    <main class="flex-grow container mx-auto px-6 py-8 prose prose-stone lg:prose-xl max-w-none">
+    <main class="flex-grow container mx-auto px-6 py-8 max-w-none">
         {{ content }}
     </main>
 
-    <footer class="bg-stone-800 text-stone-300 py-8 mt-12">
-        <div class="container mx-auto px-6 text-center">
-            <p class="text-sm">&copy; {{ "now" | date: "%Y" }} {{ site.title }} - Kordiak Park Explorer</p>
-            <p class="text-xs mt-2 text-stone-500">Columbia Heights, Minnesota</p>
+    <footer class="bg-stone-800 text-stone-300 py-12 mt-12">
+        <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+                <h4 class="text-white font-bold mb-4">Kordiak Park Explorer</h4>
+                <p class="text-sm text-stone-400">Discovering nature in Columbia Heights, Minnesota.</p>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-4">Quick Links</h4>
+                <ul class="text-sm text-stone-400 space-y-2">
+                    <li><a href="{{ site.baseurl }}/" class="hover:text-white transition-colors">Home</a></li>
+                    <li><a href="{{ site.baseurl }}/blog/" class="hover:text-white transition-colors">Blog</a></li>
+                    <li><a href="{{ site.baseurl }}/map/" class="hover:text-white transition-colors">Map</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-4">Contact</h4>
+                <p class="text-sm text-stone-400">Columbia Heights, MN</p>
+            </div>
+        </div>
+        <div class="container mx-auto px-6 mt-8 pt-8 border-t border-stone-700 text-center text-xs text-stone-500">
+            <p>&copy; {{ "now" | date: "%Y" }} {{ site.title }}</p>
         </div>
     </footer>
 
