@@ -6,13 +6,70 @@
     <title>{{ page.title }} | {{ site.title }}</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
-    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <script>
       document.addEventListener("DOMContentLoaded", function() {
         lucide.createIcons();
+
+        // Simple Search Logic
+        const searchInput = document.getElementById('search-input');
+        const resultsContainer = document.getElementById('search-results');
+
+        if (searchInput && resultsContainer) {
+            fetch('{{ site.baseurl }}/search.json')
+                .then(response => response.json())
+                .then(data => {
+                    const fuse = new Fuse(data, {
+                        keys: ['title', 'content'],
+                        threshold: 0.3
+                    });
+
+                    searchInput.addEventListener('input', () => {
+                        const query = searchInput.value;
+                        if (query.length > 2) {
+                            const results = fuse.search(query);
+                            displayResults(results);
+                        } else {
+                            resultsContainer.innerHTML = '';
+                            resultsContainer.classList.add('hidden');
+                        }
+                    });
+
+                    // Close results when clicking outside
+                    document.addEventListener('click', (e) => {
+                        if (!searchInput.contains(e.target) && !resultsContainer.contains(e.target)) {
+                            resultsContainer.classList.add('hidden');
+                        }
+                    });
+                })
+                .catch(err => console.error("Search error:", err));
+        }
+
+        function displayResults(results) {
+            resultsContainer.innerHTML = '';
+            if (results.length > 0) {
+                results.forEach(result => {
+                    const item = result.item;
+                    const div = document.createElement('div');
+                    div.className = 'p-3 hover:bg-stone-100 cursor-pointer border-b border-stone-200 last:border-0 transition-colors';
+                    div.innerHTML = `
+                        <div class="font-bold text-sm text-green-800">${item.title}</div>
+                        <div class="text-xs text-stone-500 truncate">${item.url.replace('{{ site.baseurl }}', '')}</div>
+                    `;
+                    div.onclick = () => {
+                        window.location.href = item.url;
+                    };
+                    resultsContainer.appendChild(div);
+                });
+                resultsContainer.classList.remove('hidden');
+            } else {
+                resultsContainer.innerHTML = '<div class="p-3 text-sm text-stone-500">No results found</div>';
+                resultsContainer.classList.remove('hidden');
+            }
+        }
       });
     </script>
     <style>
@@ -39,8 +96,10 @@
                 </ul>
                 
                 <div class="relative hidden lg:block">
-                    <input type="text" placeholder="Search..." class="pl-10 pr-4 py-1 rounded-full border border-stone-300 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 transition-all">
+                    <input type="text" id="search-input" placeholder="Search..." class="pl-10 pr-4 py-1 rounded-full border border-stone-300 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 transition-all">
                     <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1.5 text-stone-400"></i>
+                    <div id="search-results" class="absolute right-0 mt-2 w-64 bg-white rounded-xl shadow-xl border border-stone-200 hidden z-50 overflow-hidden">
+                    </div>
                 </div>
             </div>
         </nav>
@@ -70,7 +129,7 @@
             </div>
         </div>
         <div class="container mx-auto px-6 mt-8 pt-8 border-t border-stone-700 text-center text-xs text-stone-500">
-            <p>&copy; {{ "now" | date: "%Y" }} {{ site.title }}</p>
+            <p>&copy; 2026 Kordiak Park Explorer</p>
         </div>
     </footer>
 
