@@ -24,21 +24,23 @@ permalink: /map/
       {% endfor %}
     ];
 
-    const map = L.map('map').setView([45.058486, -93.233195], 15);
+    const map = L.map('map').setView([45.058486, -93.233195], 17);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; OpenStreetMap contributors'
     }).addTo(map);
 
     birdSightings.forEach(bird => {
+        let popupContent = `
+            <div class="text-sm">
+                <strong class="text-lg">${bird.species}</strong><br>
+                <span class="text-stone-500">${bird.date}</span><br>
+                ${bird.image ? `<img src="${bird.image}" class="w-full h-24 object-cover rounded mt-2 mb-1" />` : ''}
+                <p class="mt-1">${bird.note}</p>
+            </div>
+        `;
         L.marker([bird.lat, bird.lng])
             .addTo(map)
-            .bindPopup(`
-                <div class="text-sm">
-                    <strong class="text-lg">${bird.species}</strong><br>
-                    <span class="text-stone-500">${bird.date}</span><br>
-                    <p class="mt-1">${bird.note}</p>
-                </div>
-            `);
+            .bindPopup(popupContent);
     });
 </script>
