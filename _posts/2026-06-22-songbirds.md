@@ -2,6 +2,7 @@
 layout: post
 title: "The Return of the Songbirds"
 date: 2026-06-22
+image: "https://picsum.photos/id/1025/1200/800"
 ---
 Spring is officially in full swing!
 
